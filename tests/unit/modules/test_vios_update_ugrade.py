@@ -291,7 +291,7 @@ test_data1 = [
 
 test_data_list = [
     # device is missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'list', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'list', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': 'data', 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -299,7 +299,7 @@ test_data_list = [
      "ParameterError: mandatory parameter 'device' is missing"),
 
     # system_name is missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'list', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'list', 'attributes':
      {'system_name': None, 'vios_id': None, 'vios_name': 'data', 'device': '/dev/cd0', 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -307,7 +307,7 @@ test_data_list = [
      "ParameterError: mandatory parameter 'system_name' is missing"),
 
     # both vios_name and vios_id missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'list', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'list', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': None, 'device': '/dev/cd0', 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -315,7 +315,7 @@ test_data_list = [
      "ParameterError: Missing VIOS details"),
 
     # both vios_name and vios_id provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'list', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'list', 'attributes':
      {'system_name': 'data', 'vios_id': '1', 'vios_name': 'data', 'device': '/dev/cd0', 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -323,7 +323,7 @@ test_data_list = [
      "ParameterError: Parameters 'vios_id' and 'vios_name' are mutually exclusive"),
 
     # unsupported parameter repository provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'list', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'list', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': 'data', 'device': '/dev/cd0', 'repository': 'nfs',
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -333,7 +333,7 @@ test_data_list = [
 
 test_data_remove = [
     # filesets is missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': 'data', 'filesets': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -341,7 +341,7 @@ test_data_remove = [
      "ParameterError: mandatory parameter 'filesets' is missing"),
 
     # system_name is missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove', 'attributes':
      {'system_name': None, 'vios_id': None, 'vios_name': 'data', 'filesets': ['bos.net.tcp.server'], 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -349,7 +349,7 @@ test_data_remove = [
      "ParameterError: mandatory parameter 'system_name' is missing"),
 
     # both vios_name and vios_id missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': None, 'filesets': ['bos.net.tcp.server'], 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -357,7 +357,7 @@ test_data_remove = [
      "ParameterError: Missing VIOS details"),
 
     # both vios_name and vios_id provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove', 'attributes':
      {'system_name': 'data', 'vios_id': '1', 'vios_name': 'data', 'filesets': ['bos.net.tcp.server'], 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -365,7 +365,7 @@ test_data_remove = [
      "ParameterError: Parameters 'vios_id' and 'vios_name' are mutually exclusive"),
 
     # unsupported parameter device provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': 'data', 'filesets': ['bos.net.tcp.server'], 'device': '/dev/cd0', 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -375,7 +375,7 @@ test_data_remove = [
 
 test_data_cleanup = [
     # system_name is missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'cleanup', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'cleanup', 'attributes':
      {'system_name': None, 'vios_id': None, 'vios_name': 'data', 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -383,7 +383,7 @@ test_data_cleanup = [
      "ParameterError: mandatory parameter 'system_name' is missing"),
 
     # both vios_name and vios_id missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'cleanup', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'cleanup', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': None, 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -391,7 +391,7 @@ test_data_cleanup = [
      "ParameterError: Missing VIOS details"),
 
     # both vios_name and vios_id provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'cleanup', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'cleanup', 'attributes':
      {'system_name': 'data', 'vios_id': '1', 'vios_name': 'data', 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -399,7 +399,7 @@ test_data_cleanup = [
      "ParameterError: Parameters 'vios_id' and 'vios_name' are mutually exclusive"),
 
     # unsupported parameter device provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'cleanup', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'cleanup', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': 'data', 'device': '/dev/cd0', 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -409,7 +409,7 @@ test_data_cleanup = [
 
 test_data_remove_outdated = [
     # system_name is missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove_outdated_filesets', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove_outdated_filesets', 'attributes':
      {'system_name': None, 'vios_id': None, 'vios_name': 'data', 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -417,7 +417,7 @@ test_data_remove_outdated = [
      "ParameterError: mandatory parameter 'system_name' is missing"),
 
     # both vios_name and vios_id missed
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove_outdated_filesets', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove_outdated_filesets', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': None, 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -425,7 +425,7 @@ test_data_remove_outdated = [
      "ParameterError: Missing VIOS details"),
 
     # both vios_name and vios_id provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove_outdated_filesets', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove_outdated_filesets', 'attributes':
      {'system_name': 'data', 'vios_id': '1', 'vios_name': 'data', 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,
@@ -433,7 +433,7 @@ test_data_remove_outdated = [
      "ParameterError: Parameters 'vios_id' and 'vios_name' are mutually exclusive"),
 
     # unsupported parameter filesets provided
-    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': 'remove_outdated_filesets', 'attributes':
+    ({'hmc_host': "0.0.0.0", 'hmc_auth': hmc_auth, 'state': None, 'action': 'remove_outdated_filesets', 'attributes':
      {'system_name': 'data', 'vios_id': None, 'vios_name': 'data', 'device': None, 'repository': None,
       'image_name': None, 'host_name': None, 'user_id': None, 'password': None,
       'ssh_key_file': None, 'mount_loc': None, 'directory': None, 'option': None,

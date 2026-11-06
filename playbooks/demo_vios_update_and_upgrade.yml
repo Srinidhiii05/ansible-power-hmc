@@ -62,7 +62,7 @@
                 vios_name: <vios-name>
                 system_name: <system-name>
                 device: /dev/cd0
-            state: list
+            action: list
 
       - name: Remove the specified filesets from the VIOS
         ibm.power_hmc.vios_update_upgrade:
@@ -73,7 +73,7 @@
                 system_name: <system-name>
                 filesets:
                     - bos.net.tcp.server
-            state: remove
+            action: remove
 
       - name: Cleanup partially installed updates on the VIOS
         ibm.power_hmc.vios_update_upgrade:
@@ -82,7 +82,7 @@
             attributes:
                 vios_name: <vios-name>
                 system_name: <system-name>
-            state: cleanup
+            action: cleanup
 
       - name: Remove outdated filesets from the VIOS
         ibm.power_hmc.vios_update_upgrade:
@@ -91,4 +91,4 @@
             attributes:
                 vios_name: <vios-name>
                 system_name: <system-name>
-            state: remove_outdated_filesets
+            action: remove_outdated_filesets

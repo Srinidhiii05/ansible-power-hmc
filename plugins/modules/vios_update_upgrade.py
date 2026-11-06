@@ -152,26 +152,31 @@ options:
             device:
                 description:
                     - Specifies the device or directory containing the images to list, such as C(/dev/cd0).
-                    - This parameter is mandatory when I(state=list).
+                    - This parameter is mandatory when I(action=list).
                 type: str
             filesets:
                 description:
                     - Specifies the list of filesets to remove from the VIOS.
-                    - This parameter is mandatory when I(state=remove).
+                    - This parameter is mandatory when I(action=remove).
                 type: list
                 elements: str
+    action:
+        description:
+            - The operation to perform on the VIOS.
+            - C(list) lists the available filesets on the VIOS installation media.
+            - C(remove) removes the specified filesets from the system.
+            - C(cleanup) removes all incomplete pieces of the previous installation.
+            - C(remove_outdated_filesets) removes all outdated filesets from the system.
+        type: str
+        choices: ['list', 'remove', 'cleanup', 'remove_outdated_filesets']
     state:
         description:
             - The desired build state of the target VIOS.
             - C(facts) does not change anything on the VIOS and returns current version of VIOS.
             - C(updated) ensures the target VIOS is updated with given installation ISO image.
             - C(upgraded) ensures the target VIOS is upgraded with given upgrade files.
-            - C(list) lists the available filesets on the VIOS installation media.
-            - C(remove) removes the specified filesets from the system.
-            - C(cleanup) removes all incomplete pieces of the previous installation.
-            - C(remove_outdated_filesets) removes all outdated filesets from the system.
         type: str
-        choices: ['facts', 'updated', 'upgraded', 'list', 'remove', 'cleanup', 'remove_outdated_filesets']
+        choices: ['facts', 'updated', 'upgraded']
 '''
 
 EXAMPLES = '''
@@ -249,7 +254,7 @@ EXAMPLES = '''
       vios_name: <vios_name>
       system_name: <sys/MTMS>
       device: /dev/cd0
-    state: list
+    action: list
 
 - name: Remove the specified filesets from the VIOS from the HMC.
   ibm.power_hmc.vios_update_upgrade:
@@ -262,7 +267,7 @@ EXAMPLES = '''
       system_name: <sys/MTMS>
       filesets:
         - bos.net.tcp.server
-    state: remove
+    action: remove
 
 - name: Cleanup partially installed updates on the VIOS from the HMC.
   ibm.power_hmc.vios_update_upgrade:
@@ -273,7 +278,7 @@ EXAMPLES = '''
     attributes:
       vios_name: <vios_name>
       system_name: <sys/MTMS>
-    state: cleanup
+    action: cleanup
 
 - name: Remove outdated filesets from the VIOS from the HMC.
   ibm.power_hmc.vios_update_upgrade:
@@ -284,7 +289,7 @@ EXAMPLES = '''
     attributes:
       vios_name: <vios_name>
       system_name: <sys/MTMS>
-    state: remove_outdated_filesets
+    action: remove_outdated_filesets
 '''
 
 RETURN = '''
@@ -322,7 +327,10 @@ def validate_sub_params(params):
     opr = None
     unsupportedList = []
     mandatoryList = []
-    opr = params['state']
+    if params['state'] is not None:
+        opr = params['state']
+    else:
+        opr = params['action']
     params = params['attributes']
     mandatoryList = ['repository', 'system_name']
     if opr == 'facts':
@@ -678,8 +686,9 @@ def perform_task(module):
 
     if not params['hmc_auth']:
         return False, "missing credential info", None
+    opr = params['state'] if params['state'] is not None else params['action']
     try:
-        return actions[params['state']](module, params)
+        return actions[opr](module, params)
     except Exception as error:
         return False, repr(error), None
 
@@ -695,7 +704,8 @@ def run_module():
                           password=dict(type='str', no_log=True),
                       )
                       ),
-        state=dict(type='str', choices=['updated', 'upgraded', 'facts', 'list', 'remove', 'cleanup', 'remove_outdated_filesets']),
+        state=dict(type='str', choices=['updated', 'upgraded', 'facts']),
+        action=dict(type='str', choices=['list', 'remove', 'cleanup', 'remove_outdated_filesets']),
         attributes=dict(type='dict',
                         required=True,
                         options=dict(
@@ -723,6 +733,8 @@ def run_module():
 
     module = AnsibleModule(
         argument_spec=module_args,
+        mutually_exclusive=[('state', 'action')],
+        required_one_of=[('state', 'action')],
     )
 
     if module._verbosity >= 5:
