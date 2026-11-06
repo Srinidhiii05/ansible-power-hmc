@@ -53,3 +53,42 @@
                 files:
                     - H06412454.iso
             state: updated
+
+      - name: List the available filesets on the VIOS installation media
+        ibm.power_hmc.vios_update_upgrade:
+            hmc_host: '{{ inventory_hostname }}'
+            hmc_auth: '{{ curr_hmc_auth }}'
+            attributes:
+                vios_name: <vios-name>
+                system_name: <system-name>
+                device: /dev/cd0
+            state: list
+
+      - name: Remove the specified filesets from the VIOS
+        ibm.power_hmc.vios_update_upgrade:
+            hmc_host: '{{ inventory_hostname }}'
+            hmc_auth: '{{ curr_hmc_auth }}'
+            attributes:
+                vios_name: <vios-name>
+                system_name: <system-name>
+                filesets:
+                    - bos.net.tcp.server
+            state: remove
+
+      - name: Cleanup partially installed updates on the VIOS
+        ibm.power_hmc.vios_update_upgrade:
+            hmc_host: '{{ inventory_hostname }}'
+            hmc_auth: '{{ curr_hmc_auth }}'
+            attributes:
+                vios_name: <vios-name>
+                system_name: <system-name>
+            state: cleanup
+
+      - name: Remove outdated filesets from the VIOS
+        ibm.power_hmc.vios_update_upgrade:
+            hmc_host: '{{ inventory_hostname }}'
+            hmc_auth: '{{ curr_hmc_auth }}'
+            attributes:
+                vios_name: <vios-name>
+                system_name: <system-name>
+            state: remove_outdated_filesets
